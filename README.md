@@ -8,3 +8,4 @@ step 5 select hosting
 step 6 firebase serve
 step 7 firebase deploy
 note after every change you have to firebase deploy
+for local hosting : firebase serve --only hosting 
