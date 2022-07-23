@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fozia Tech</title>
+  </head>
+  <body>
+    <h1> Firebase Authentication of E-mail and Password</h1>
+   
+    <br>
+    <h3>Sign Up:</h3> 
+<input type="email" id="signUpEmail"/>
+<input type="password" id="signUpPassword"/>
+<br>
+<Button id="signupbtn">Sign Up</Button>
+<br>
+<div id="loginScreen"> 
+  <h3>Sign In:</h3> 
+<input type="email" id="signInEmail"/>
+<input type="password" id="signInPassword"/>
+<br>
+<Button id="signinbtn">Sign In</Button>
+</div>
+<br/>
+<div id="dashboard">
+  <div id="userDetails"></div>
+  <button id="logout">Logout</button>
+</div>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+ 
+
+    <script>
+      // Your web app's Firebase configuration
+      
+     const firebaseConfig = {
+  apiKey: "AIzaSyCvsXmRb63NaugRj0YBDM9Lolej7Egxtgk",
+  authDomain: "fozi-fire.firebaseapp.com",
+  projectId: "fozi-fire",
+  storageBucket: "fozi-fire.appspot.com",
+  messagingSenderId: "969370262073",
+  appId: "1:969370262073:web:39855e866192bc71ac0be8"
+};
+      
+      firebase.initializeApp(firebaseConfig);
+     
+
+
+</script>
+<script>
+document.getElementById('signupbtn').addEventListener('click',signUp)
+async function signUp(){
+  const email =document.getElementById('signUpEmail').value;
+  const password =document.getElementById('signUpPassword').value;
+  try{
+const result = firebase.auth().createUserWithEmailAndPassword(email, password)
+console.log(result)
+  }
+  catch{
+console.log(error)
+  }
+}
+document.getElementById('signinbtn').addEventListener('click',signIn)
+async function signIn(){
+  const email=document.getElementById('signInEmail').value;
+ const password= document.getElementById('signInPassword').value;
+  try{
+  const result =await firebase.auth().signInWithEmailAndPassword(email, password)
+  console.log("success",result)}
+  catch{
+    console.log("Oh no")
+  }
+}
+firebase.auth().onAuthStateChanged(user=>{
+ if(user){
+  console.log(user);
+  
+ }
+  else{
+    
+  }
+})
+document.getElementById('logout').addEventListener('click',signOut)
+function signOut(){
+
+firebase.auth().signOut().then(() => {
+  // Sign-out successful.
+}).catch((error) => {
+  // An error happened.
+})
+}
+</script>
+  </body>
+</html>
